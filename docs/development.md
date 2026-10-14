@@ -37,20 +37,27 @@ cannot guarantee model adherence to checkpoint instructions.
 ## Manual Codex Desktop hook checks
 
 These scenarios require a real Codex Desktop installation and are not covered by
-unit tests:
+unit tests, and have not yet been tested. `/hooks` is a Codex CLI command, not a
+procedure for completing these Desktop checks.
 
 | Setup/action | Expected behavior |
 | --- | --- |
-| Install the plugin in an isolated project with active notes | Codex lists the bundled SessionStart hook for review; before trust it does not run. Trust the current definition in `/hooks`, then start a session and confirm concise context arrives without a status message. |
+| Install the plugin in an isolated project with active notes | Verify Desktop lists the bundled SessionStart hook for review and skips it before trust. Review and trust the current definition through Desktop's supported flow, then start a session and confirm concise context arrives without a status message. |
 | Repeat SessionStart with `startup`, `resume`, `clear`, and `compact` | Each source restores active context. Clearing chat context does not reset project notes or approve a pending decision. |
 | Use a paused profile, no notes, invalid notes, or a forked session | The hook emits no restoration context. |
 | Put unique private text in profile, progress, project-map, and transcript files | Hook output contains no note or transcript body text; it contains only instructions and paths. |
-| Disable this hook in `/hooks`, then start or resume a session | This individual hook stays disabled and contributes no context. |
 | Change the hook definition after trust | Codex asks for review of the changed definition before it runs. |
 
 The plugin hook is read-only and fail-open. These manual checks confirm the
 Desktop's registration, trust, and lifecycle behavior, which local unit tests cannot
 simulate.
+
+## Codex CLI hook controls
+
+`/hooks` is documented for Codex CLI. In the CLI, use it to inspect configured
+hooks, review and trust a changed definition, or disable an individual non-managed
+hook. This CLI control does not verify the plugin's Desktop discovery, trust, or
+lifecycle behavior.
 
 Reset requires exclusive use of the notes by convention. Fingerprints detect changes
 before replacement, not arbitrary concurrent writers after the final check. Each

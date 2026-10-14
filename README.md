@@ -139,9 +139,11 @@ for the same project to avoid duplicate discovery. See
 
 Installing the plugin makes its bundled hook available in Codex Desktop. Codex
 requires you to review and trust the current hook definition before it runs; a
-changed definition requires review again. Use `/hooks` to inspect it, grant trust,
-or disable this individual hook. Codex can run the plugin hook only where the
-plugin scripts are installed locally. See the
+changed definition requires review again. In the Codex CLI, run `/hooks` to inspect
+the hook, review and trust its definition, or disable it individually. `/hooks` is
+a CLI command, not a Desktop instruction; Desktop trust and lifecycle behavior for
+this plugin remains untested. Codex can run the plugin hook only where the plugin
+scripts are installed locally. See the
 [Codex hook documentation](https://learn.chatgpt.com/docs/hooks) for the current
 trust and hook controls.
 
